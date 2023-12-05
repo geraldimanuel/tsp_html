@@ -6,7 +6,7 @@ function collectCoordinates() {
 
 	let coordinatesInput = "<div>";
 	for (let i = 0; i < numCities; i++) {
-		coordinatesInput += `<div>City ${i + 1}: `;
+		coordinatesInput += `<div id="input">City ${i + 1}: `;
 		coordinatesInput += `<input type="number" id="x${i}" placeholder="X-coordinate">`;
 		coordinatesInput += `<input type="number" id="y${i}" placeholder="Y-coordinate"></div>`;
 	}
