@@ -15,6 +15,39 @@ function collectCoordinates() {
 	document.getElementById("coordinatesInput").innerHTML = coordinatesInput;
 }
 
+function drawRoute(route, coordinates) {
+	const svg = d3.select("#visualization");
+
+	// Clear existing content
+	svg.selectAll("*").remove();
+
+	// Draw connecting lines between cities
+	for (let i = 0; i < route.length - 1; i++) {
+		const city1 = coordinates[route[i]];
+		const city2 = coordinates[route[i + 1]];
+
+		svg
+			.append("line")
+			.attr("x1", city1.x)
+			.attr("y1", city1.y)
+			.attr("x2", city2.x)
+			.attr("y2", city2.y)
+			.attr("stroke", "black")
+			.attr("stroke-width", 2);
+	}
+
+	// Draw circles for each city
+	svg
+		.selectAll("circle")
+		.data(coordinates)
+		.enter()
+		.append("circle")
+		.attr("cx", (d) => d.x)
+		.attr("cy", (d) => d.y)
+		.attr("r", 6)
+		.attr("fill", "red");
+}
+
 class SA {
 	constructor(n, maxit, maxitpermtemp, T, x = null, y = null) {
 		this.n = n; // number of cities
@@ -66,12 +99,12 @@ class SA {
 	}
 
 	cost(route) {
-		let L = 0;
-		route.push(route[0]);
-		for (let i = 0; i < this.n; i++) {
-			L += this.D[route[i]][route[i + 1]];
+		let totalDistance = 0;
+		for (let i = 0; i < this.n - 1; i++) {
+			totalDistance += this.D[route[i]][route[i + 1]];
 		}
-		return L;
+		totalDistance += this.D[route[this.n - 1]][route[0]]; // Adding distance from the last to the first city
+		return totalDistance;
 	}
 
 	main() {
@@ -117,8 +150,7 @@ class SA {
 		visualizationDiv.innerHTML += `<p>Total Distance: ${cost.toFixed(
 			3
 		)} km</p>`;
-		// You can use D3.js or other visualization libraries here to draw the route.
-		// For simplicity, here's a basic example using text representation:
+
 		visualizationDiv.innerHTML += `<p>${JSON.stringify(tour)}</p>`;
 	}
 }
@@ -134,9 +166,9 @@ function startSimulation() {
 		coordinates.push({ x: xCoord, y: yCoord });
 	}
 
-	const temperature = 100;
-	const iterations = 1000;
-	const iterationsPerTemp = 100;
+	const temperature = 10;
+	const iterations = 200;
+	const iterationsPerTemp = 10;
 
 	const sa = new SA(
 		numCities,
