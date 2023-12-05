@@ -15,38 +15,38 @@ function collectCoordinates() {
 	document.getElementById("coordinatesInput").innerHTML = coordinatesInput;
 }
 
-function drawRoute(route, coordinates) {
-	const svg = d3.select("#visualization");
+// function drawRoute(route, coordinates) {
+// 	const svg = d3.select("#visualization");
 
-	// Clear existing content
-	svg.selectAll("*").remove();
+// 	// Clear existing content
+// 	svg.selectAll("*").remove();
 
-	// Draw connecting lines between cities
-	for (let i = 0; i < route.length - 1; i++) {
-		const city1 = coordinates[route[i]];
-		const city2 = coordinates[route[i + 1]];
+// 	// Draw connecting lines between cities
+// 	for (let i = 0; i < route.length - 1; i++) {
+// 		const city1 = coordinates[route[i]];
+// 		const city2 = coordinates[route[i + 1]];
 
-		svg
-			.append("line")
-			.attr("x1", city1.x)
-			.attr("y1", city1.y)
-			.attr("x2", city2.x)
-			.attr("y2", city2.y)
-			.attr("stroke", "black")
-			.attr("stroke-width", 2);
-	}
+// 		svg
+// 			.append("line")
+// 			.attr("x1", city1.x)
+// 			.attr("y1", city1.y)
+// 			.attr("x2", city2.x)
+// 			.attr("y2", city2.y)
+// 			.attr("stroke", "black")
+// 			.attr("stroke-width", 2);
+// 	}
 
-	// Draw circles for each city
-	svg
-		.selectAll("circle")
-		.data(coordinates)
-		.enter()
-		.append("circle")
-		.attr("cx", (d) => d.x)
-		.attr("cy", (d) => d.y)
-		.attr("r", 6)
-		.attr("fill", "red");
-}
+// 	// Draw circles for each city
+// 	svg
+// 		.selectAll("circle")
+// 		.data(coordinates)
+// 		.enter()
+// 		.append("circle")
+// 		.attr("cx", (d) => d.x)
+// 		.attr("cy", (d) => d.y)
+// 		.attr("r", 6)
+// 		.attr("fill", "red");
+// }
 
 class SA {
 	constructor(n, maxit, maxitpermtemp, T, x = null, y = null) {
