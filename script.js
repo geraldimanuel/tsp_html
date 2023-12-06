@@ -119,6 +119,15 @@ class SA {
 		)} km</p>`;
 
 		visualizationDiv.innerHTML += `<p>${JSON.stringify(tour)}</p>`;
+
+		// visualizationDiv.innerHTML += "<p>Best Cost History:</p>";
+		// visualizationDiv.innerHTML += "<ul>";
+		// for (let i = 0; i < bestCostHistory.length; i++) {
+		// 	visualizationDiv.innerHTML += `<li>Iteration ${i + 1}: ${bestCostHistory[
+		// 		i
+		// 	].toFixed(3)} km</li>`;
+		// }
+		// visualizationDiv.innerHTML += "</ul>";
 	}
 }
 
